@@ -59,7 +59,7 @@ export default function App() {
                 style={({ pressed }) => [
                   {
                     width: '80%',
-                    paddingVertical: 16,
+                    paddingVertical: 10, // Reduced padding for smaller height
                     borderRadius: 12,
                     overflow: 'hidden',
                     shadowColor: '#000',
@@ -69,28 +69,26 @@ export default function App() {
                     elevation: 6,
                     marginTop: 20,
                     transform: [{ scale: pressed ? 0.98 : 1 }],
+                    backgroundColor: '#fff', // White background for button
                   },
                 ]}
               >
-                <LinearGradient
-                  colors={['#e53935', '#d32f2f']} // Red gradient colors for Gmail button
-                  style={{
-                    paddingVertical: 16,
-                    alignItems: 'center',
-                    borderRadius: 12,
-                  }}
-                >
+                <View style={{
+                  paddingVertical: 10, // Reduced padding for smaller height
+                  alignItems: 'center',
+                  borderRadius: 12,
+                }}>
                   <Text style={{
                     fontSize: 20,
-                    color: '#fff',
+                    color: '#000', // Black text for button label
                     fontWeight: 'bold',
-                    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+                    textShadowColor: 'rgba(255, 255, 255, 0.3)',
                     textShadowOffset: { width: 0, height: 1 },
                     textShadowRadius: 4,
                   }}>
-                    Continue with Gmail
+                    Continue with Google
                   </Text>
-                </LinearGradient>
+                </View>
               </Pressable>
             </View>
           </ScrollView>
