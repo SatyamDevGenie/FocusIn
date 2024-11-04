@@ -1,0 +1,11 @@
+{
+  "name": "focus-in",
+  "version": "1.0.0",
+  "description": "User friendly app with AI features all in one unique platform",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Satyam Subhash Sawant",
+  "license": "ISC"
+}
