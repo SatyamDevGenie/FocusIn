@@ -6,18 +6,18 @@ import userRoutes from "./routes/userRoutes.js"
 import { errorHandler, notFound } from './middlewares/errorMiddleware.js';
 
 
-const app = express();
-
 // Load environment variables
 dotenv.config();
 connectDB();
+
+
+const app = express();
+
 
 // Middleware
 app.use(express.json());
 
 app.use("/api/users", userRoutes);
-
-
 
 app.get("/", (req, res)=>{
     res.send("FocusIn API is running")
@@ -25,6 +25,7 @@ app.get("/", (req, res)=>{
 
 app.use(notFound);
 app.use(errorHandler);
+
 
 const PORT = process.env.PORT || 5000;
 
