@@ -5,7 +5,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import images from '../../constants/images';
 import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton';
+import { useRouter } from 'expo-router';
 import { Link } from 'expo-router';
+import axios from "axios";
+
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -15,68 +18,75 @@ const SignUp = () => {
   });
 
   const [isSubmitting, setSubmitting] = useState(false);
+  const router = useRouter();
 
-  const submit = () => {
-    // Handle sign-up logic here
+  const submit = async () => {
     setSubmitting(true);
-    setTimeout(() => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        router.push('/home');
+      } else {
+        alert(data.message || 'Registration failed!');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred, please try again later.');
+    } finally {
       setSubmitting(false);
-    }, 2000);
+    }
   };
 
   return (
-    <LinearGradient
-      colors={['#1c1c1c', '#3533cd', '#000000']}
-      style={styles.gradient}
-    >
+    <LinearGradient colors={['#1c1c1c', '#3533cd', '#000000']} style={styles.gradient}>
       <SafeAreaView style={styles.safeArea}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View style={styles.container}>
-            <Image 
-              source={images.logo}
-              resizeMode='contain' 
-              style={styles.logo} 
-            />
-            <Text style={styles.title}>
-              Sign Up to FocusIn
-            </Text>
+            <Image source={images.logo} resizeMode="contain" style={styles.logo} />
+            <Text style={styles.title}>Sign Up to FocusIn</Text>
 
-            {/* Input fields */}
-            <FormField 
-              title="Username"
-              value={form.username}
-              handleChangeText={(e) => setForm({ ...form, username: e })}
-              otherStyles={styles.inputSpacing}
-            />
-            <FormField 
-              title="Email"
-              value={form.email}
-              handleChangeText={(e) => setForm({ ...form, email: e })}
-              otherStyles={styles.inputSpacing}
-              keyboardType="email-address"
-            />
-            <FormField 
-              title="Password"
-              value={form.password}
-              handleChangeText={(e) => setForm({ ...form, password: e })}
-              otherStyles={styles.inputSpacing}
-            />
+            <View style={styles.inputContainer}>
+              <FormField
+                title="Username"
+                value={form.username}
+                handleChangeText={(e) => setForm({ ...form, username: e })}
+                otherStyles={styles.inputSpacing}
+              />
+              <FormField
+                title="Email"
+                value={form.email}
+                handleChangeText={(e) => setForm({ ...form, email: e })}
+                otherStyles={styles.inputSpacing}
+                keyboardType="email-address"
+              />
+              <FormField
+                title="Password"
+                value={form.password}
+                handleChangeText={(e) => setForm({ ...form, password: e })}
+                otherStyles={styles.inputSpacing}
+              />
+            </View>
 
-            <CustomButton 
+            <CustomButton
               title="Sign Up"
               handlePress={submit}
-              containerStyles={styles.buttonContainer} 
+              containerStyles={styles.buttonContainer}
               isLoading={isSubmitting}
+              textStyle={styles.buttonText}
             />
 
             <View style={styles.footer}>
-              <Text style={styles.footerText}>
-                Already have an account?
-              </Text>
-              <Link
-                href="/sign-in"
-                style={styles.signupLink}
-              >
+              <Text style={styles.footerText}>Already have an account?</Text>
+              <Link href="/sign-in" style={styles.signupLink}>
                 Sign in
               </Link>
             </View>
@@ -96,33 +106,45 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1,
-    padding: 16,
     justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
   },
   container: {
     alignItems: 'center',
-    minHeight: '85vh',
+    width: '100%',
+    paddingHorizontal: 20,
   },
   logo: {
-    width: 120,
-    height: 120,
+    width: 200,
+    height: 200,
     marginBottom: 20,
   },
   title: {
     color: '#f5f5f5',
     fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
+    marginBottom: 10,
+  },
+  inputContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 8,
   },
   inputSpacing: {
-    marginTop: 20,
-    width: '100%', // Wider input fields
+    marginTop: 0,
+    width: '90%',
+    paddingVertical: 12,
+    borderRadius: 25,
   },
   buttonContainer: {
-    marginTop: 20,
-    width: '100%', // Full width for button
+    marginTop: 0,
+    width: '90%',
     borderRadius: 25,
+    backgroundColor: '#FFFFFF',
+  },
+  buttonText: {
+    color: '#000000',
   },
   footer: {
     flexDirection: 'row',
@@ -131,12 +153,12 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 16,
-    color: '#f5f5f5',
+    color: '#FFA500',
   },
   signupLink: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#3533cd',
+    color: '#FFA500',
     marginLeft: 5,
   },
 });

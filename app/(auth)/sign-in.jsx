@@ -1,3 +1,4 @@
+// web 514953434534-avtc8si154b6vhqrq5naa0e2ccvtk9eh.apps.googleusercontent.com
 import { View, Text, ScrollView, Image, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -61,6 +62,7 @@ const SignIn = () => {
               />
             </View>
 
+            {/* Sign In button with original size */}
             <CustomButton 
               title="Sign In"
               handlePress={submit}
@@ -95,16 +97,20 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1,
+    justifyContent: 'center', // Vertically center the content
+    alignItems: 'center', // Horizontally center the content
     padding: 16,
-    justifyContent: 'center',
   },
   container: {
     alignItems: 'center',
-    minHeight: '85vh',
+    width: '100%',
+    paddingHorizontal: 20,
+    justifyContent: 'center', // Center everything vertically
+    flex: 1, // Ensure the container takes up all available space
   },
   logo: {
-    width: 120,
-    height: 120,
+    width: 220,
+    height: 200,
     marginBottom: 20,
   },
   title: {
@@ -116,23 +122,26 @@ const styles = StyleSheet.create({
   subtitle: {
     color: '#aaa',
     fontSize: 16,
-    marginBottom: 30,
+    marginBottom: 20, // Reduced bottom margin for subtitle
   },
   inputContainer: {
     width: '100%', // Full width for inputs container
     alignItems: 'center', // Center input fields horizontally
+    marginBottom: 8, // Further reduce space between inputs and button
   },
   inputSpacing: {
-    marginTop: 10,
-    width: '100%', // Full width for inputs
+    marginTop: 0, // Reduced top margin between input fields
+    width: '90%', // Set a smaller width for inputs (to keep them centered properly)
     paddingVertical: 12, // Increase padding for height
     borderRadius: 25, // Rounded corners similar to button
   },
   buttonContainer: {
-    marginTop: 20,
-    width: '100%', // Full width for button
+    marginTop: 8, // Reduced margin to bring the button closer to the password field
+    width: '90%', // Set the button width same as the inputs
     borderRadius: 25,
+    backgroundColor: '#008080', // Updated background color for the button
   },
+  
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
