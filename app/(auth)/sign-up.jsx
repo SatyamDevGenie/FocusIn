@@ -23,7 +23,7 @@ const SignUp = () => {
   const submit = async () => {
     setSubmitting(true);
     try {
-      const response = await axios.post('http://192.168.0.108:5000/api/users/register', {
+      const response = await axios.post('http://localhost:5000/api/users/register', {
         name: form.name,
         email: form.email,
         password: form.password,
