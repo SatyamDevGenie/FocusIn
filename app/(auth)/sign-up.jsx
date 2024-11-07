@@ -12,7 +12,7 @@ import axios from "axios";
 
 const SignUp = () => {
   const [form, setForm] = useState({
-    username: '',
+    name: '',
     email: '',
     password: ''
   });
@@ -23,20 +23,20 @@ const SignUp = () => {
   const submit = async () => {
     setSubmitting(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/users/register', {
-        method: 'POST',
+      const response = await axios.post('http://192.168.0.108:5000/api/users/register', {
+        name: form.name,
+        email: form.email,
+        password: form.password,
+      }, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(form),
       });
-
-      const data = await response.json();
-
-      if (response.ok) {
+  
+      if (response.status === 201) { // Check for successful creation
         router.push('/home');
       } else {
-        alert(data.message || 'Registration failed!');
+        alert(response.data.message || 'Registration failed!');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -45,6 +45,7 @@ const SignUp = () => {
       setSubmitting(false);
     }
   };
+  
 
   return (
     <LinearGradient colors={['#1c1c1c', '#3533cd', '#000000']} style={styles.gradient}>
@@ -56,9 +57,9 @@ const SignUp = () => {
 
             <View style={styles.inputContainer}>
               <FormField
-                title="Username"
-                value={form.username}
-                handleChangeText={(e) => setForm({ ...form, username: e })}
+                title="name"
+                value={form.name}
+                handleChangeText={(e) => setForm({ ...form, name: e })}
                 otherStyles={styles.inputSpacing}
               />
               <FormField
