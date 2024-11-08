@@ -5,17 +5,17 @@ import { LinearGradient } from 'expo-linear-gradient';
 import images from '../../constants/images';
 import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import axios from 'axios';
 
 const SignIn = () => {
+  const router = useRouter(); // Initialize router for navigation
   const [form, setForm] = useState({
     email: '',
     password: ''
   });
 
   const [isSubmitting, setSubmitting] = useState(false);
-  // const router = useRouter();
 
   const submit = async () => {
     setSubmitting(true);
@@ -32,8 +32,8 @@ const SignIn = () => {
 
       if (response.status === 200) {
         alert('Login successful!');
-        // You can navigate to another page here or save the user token
-        router.push('/home')
+        // Navigate to the homepage
+        router.push('/home');
         console.log(response.data);
       } else {
         alert(response.data.message || 'Login failed!');
