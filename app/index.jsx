@@ -9,7 +9,7 @@ export default function App() {
   return (
     <View style={{ flex: 1 }}>
       <LinearGradient
-        colors={['#000000', '#3533cd', '#1c1c1c']}
+        colors={['#1e3c72', '#2a5298']}  // Updated gradient colors
         style={{ flex: 1 }}
       >
         <SafeAreaView style={{ flex: 1 }}>
