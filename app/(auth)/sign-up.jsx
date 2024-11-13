@@ -9,7 +9,6 @@ import { useRouter } from 'expo-router';
 import { Link } from 'expo-router';
 import axios from "axios";
 
-
 const SignUp = () => {
   const [form, setForm] = useState({
     name: '',
@@ -34,7 +33,7 @@ const SignUp = () => {
       });
   
       if (response.status === 201) { // Check for successful creation
-        router.push('/home');
+        router.push('/timetable');
       } else {
         alert(response.data.message || 'Registration failed!');
       }
@@ -45,10 +44,9 @@ const SignUp = () => {
       setSubmitting(false);
     }
   };
-  
 
   return (
-    <LinearGradient colors={['#1c1c1c', '#3533cd', '#000000']} style={styles.gradient}>
+    <LinearGradient colors={['#1e3c72', '#2a5298']} style={styles.gradient}>
       <SafeAreaView style={styles.safeArea}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View style={styles.container}>
@@ -57,7 +55,7 @@ const SignUp = () => {
 
             <View style={styles.inputContainer}>
               <FormField
-                title="name"
+                title="Name"
                 value={form.name}
                 handleChangeText={(e) => setForm({ ...form, name: e })}
                 otherStyles={styles.inputSpacing}
