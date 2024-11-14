@@ -49,8 +49,8 @@ const SignIn = () => {
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View style={styles.container}>
             <Image source={images.logo} resizeMode='contain' style={styles.logo} />
-            <Text style={styles.title}>Welcome Back!</Text>
-            <Text style={styles.subtitle}>Login to your account</Text>
+            {/* <Text style={styles.title}>Welcome Back!</Text> */}
+            <Text style={styles.subtitle}>Login to your Account</Text>
 
             <View style={styles.inputContainer}>
               <FormField 
@@ -69,15 +69,15 @@ const SignIn = () => {
             </View>
 
             <CustomButton 
-              title="Sign In"
+              title="Login"
               handlePress={submit}
               containerStyles={styles.buttonContainer} 
               isLoading={isSubmitting}
             />
 
             <View style={styles.footer}>
-              <Text style={styles.footerText}>Don’t have an account?</Text>
-              <Link href="/sign-up" style={styles.signupLink}>Signup</Link>
+              <Text style={styles.footerText}>Don’t have an account ?</Text>
+              <Link href="/sign-up" style={styles.signupLink}>Register here</Link>
             </View>
           </View>
         </ScrollView>
@@ -104,18 +104,18 @@ const styles = StyleSheet.create({
   },
   logo: { width: 220, height: 200, marginBottom: 20 },
   title: { color: '#f0f0f0', fontSize: 28, fontWeight: 'bold', marginBottom: 10 },
-  subtitle: { color: '#d3d3d3', fontSize: 16, marginBottom: 20 },
+  subtitle: { color: '#d3d3d3', fontSize: 23, marginBottom: 20, fontWeight:"800" },
   inputContainer: { width: '100%', alignItems: 'center', marginBottom: 8 },
   inputSpacing: { marginTop: 0, width: '90%', paddingVertical: 12, borderRadius: 25 },
   buttonContainer: { 
     marginTop: 8, 
     width: '90%', 
     borderRadius: 25, 
-    backgroundColor: '#4f4f4f' 
+    backgroundColor: '#4f4f4f', 
   },
   footer: { flexDirection: 'row', justifyContent: 'center', marginTop: 20, alignItems: 'center' },
-  footerText: { fontSize: 16, color: '#d3d3d3', marginRight: 5 },
-  signupLink: { fontSize: 16, fontWeight: '600', color: '#d3d3d3' },
+  footerText: { fontSize: 17, color: '#d3d3d3', marginRight: 5, fontWeight:"800" },
+  signupLink: { fontSize: 17, fontWeight: '600', color: '#d3d3d3', fontWeight:"800" },
 });
 
 export default SignIn;
