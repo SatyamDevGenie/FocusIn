@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar";
+import { StatusBar } from 'expo-status-bar';
 import { Tabs } from "expo-router";
 import { Image, Text, View, Animated } from "react-native";
 import { icons } from '../../constants';
@@ -61,42 +61,42 @@ const TabLayout = () => {
         }}
       >
         <Tabs.Screen
-          name="home"
+          name="timetable"
           options={{
-            title: "Home",
+            title: "timetable",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon icon={icons.home} color={color} name="Home" focused={focused} />
+              <TabIcon icon={icons.timetable} color={color} name="timetable" focused={focused} />
             ),
           }}
         />
         <Tabs.Screen
-          name="create"
+          name="message"
           options={{
-            title: "Create",
+            title: "message",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon icon={icons.plus} color={color} name="Create" focused={focused} />
+              <TabIcon icon={icons.message} color={color} name="message" focused={focused} />
             ),
           }}
         />
         <Tabs.Screen
-          name="bookmark"
+          name="blogs"
           options={{
-            title: "Bookmark",
+            title: "blogs",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon icon={icons.bookmark} color={color} name="Bookmark" focused={focused} />
+              <TabIcon icon={icons.blogs} color={color} name="blogs" focused={focused} />
             ),
           }}
         />
         <Tabs.Screen
-          name="profile"
+          name="ebook"
           options={{
-            title: "Profile",
+            title: "ebook",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon icon={icons.profile} color={color} name="Profile" focused={focused} />
+              <TabIcon icon={icons.ebook} color={color} name="ebook" focused={focused} />
             ),
           }}
         />

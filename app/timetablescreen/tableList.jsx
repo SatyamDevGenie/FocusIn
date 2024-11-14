@@ -10,7 +10,7 @@ const TableList = () => {
       <Text style={styles.title}>Task List</Text>
       
       <Pressable
-        onPress={() => router.push('/timetablescreen/settask')}
+        onPress={() => router.push('/timeTableScreen/setTask')}
         style={({ pressed }) => [
           styles.createButton,
           { opacity: pressed ? 0.8 : 1 },
