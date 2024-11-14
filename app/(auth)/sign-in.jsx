@@ -50,7 +50,7 @@ const SignIn = () => {
           <View style={styles.container}>
             <Image source={images.logo} resizeMode='contain' style={styles.logo} />
             {/* <Text style={styles.title}>Welcome Back!</Text> */}
-            <Text style={styles.subtitle}>Login to your Account</Text>
+            <Text style={styles.subtitle}>Sign In your Account</Text>
 
             <View style={styles.inputContainer}>
               <FormField 
@@ -77,7 +77,7 @@ const SignIn = () => {
 
             <View style={styles.footer}>
               <Text style={styles.footerText}>Don’t have an account ?</Text>
-              <Link href="/sign-up" style={styles.signupLink}>Register here</Link>
+              <Link href="/sign-up" style={styles.signupLink}>Register</Link>
             </View>
           </View>
         </ScrollView>
@@ -102,9 +102,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
   },
-  logo: { width: 220, height: 200, marginBottom: 20 },
+  logo: {  width: 500,
+    height: 200,
+    marginBottom: 20, },
+    
   title: { color: '#f0f0f0', fontSize: 28, fontWeight: 'bold', marginBottom: 10 },
-  subtitle: { color: '#d3d3d3', fontSize: 23, marginBottom: 20, fontWeight:"800" },
+  subtitle: { color: '#d3d3d3', fontSize: 24, marginBottom: 20, fontWeight:"800" },
   inputContainer: { width: '100%', alignItems: 'center', marginBottom: 8 },
   inputSpacing: { marginTop: 0, width: '90%', paddingVertical: 12, borderRadius: 25 },
   buttonContainer: { 

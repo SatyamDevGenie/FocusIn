@@ -51,7 +51,7 @@ const SignUp = () => {
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View style={styles.container}>
             <Image source={images.logo} resizeMode="contain" style={styles.logo} />
-            <Text style={styles.title}>Sign Up to FocusIn</Text>
+            <Text style={styles.title}>Sign Up your Account</Text> 
 
             <View style={styles.inputContainer}>
               <FormField
@@ -76,7 +76,7 @@ const SignUp = () => {
             </View>
 
             <CustomButton
-              title="Sign Up"
+              title="Register"
               handlePress={submit}
               containerStyles={styles.buttonContainer}
               isLoading={isSubmitting}
@@ -84,9 +84,9 @@ const SignUp = () => {
             />
 
             <View style={styles.footer}>
-              <Text style={styles.footerText}>Already have an account?</Text>
+              <Text style={styles.footerText}>Already have an account ?</Text>
               <Link href="/sign-in" style={styles.signupLink}>
-                Sign in
+                Login
               </Link>
             </View>
           </View>
@@ -95,6 +95,7 @@ const SignUp = () => {
     </LinearGradient>
   );
 };
+
 
 const styles = StyleSheet.create({
   gradient: {
@@ -110,25 +111,27 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   container: {
-    alignItems: 'center',
+    flex: 1, // Take up the full height
+    justifyContent: 'center', // Center vertically
+    alignItems: 'center', // Center horizontally
     width: '100%',
     paddingHorizontal: 20,
   },
   logo: {
-    width: 200,
+    width: 500,
     height: 200,
     marginBottom: 20,
   },
   title: {
     color: '#f5f5f5',
-    fontSize: 30,
-    fontWeight: 'bold',
+    fontSize: 24,
+    fontWeight: '900',
     marginBottom: 10,
   },
   inputContainer: {
     width: '100%',
     alignItems: 'center',
-    marginBottom: 8,
+    marginTop:'5%'
   },
   inputSpacing: {
     marginTop: 0,
@@ -150,16 +153,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20,
   },
-  footerText: {
-    fontSize: 16,
-    color: '#FFA500',
+  footerText: { 
+    fontSize: 17,
+    color: '#d3d3d3',
+    marginRight: 5, 
+    fontWeight:"800"
   },
   signupLink: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#FFA500',
+    fontSize: 17,
+    fontWeight: '900',
+    color: '#d3d3d3',
     marginLeft: 5,
   },
 });
+
 
 export default SignUp;
