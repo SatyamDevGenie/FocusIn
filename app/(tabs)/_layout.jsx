@@ -6,37 +6,43 @@ import { useState } from "react";
 
 const TabIcon = ({ icon, color, name, focused }) => {
   const scale = useState(new Animated.Value(1))[0];
-
-  // Scale effect on focused state
-  Animated.timing(scale, {
-    toValue: focused ? 1.1 : 1,
-    duration: 150,
+  
+  // Apply smooth spring animation
+  Animated.spring(scale, {
+    toValue: focused ? 1.15 : 1,
+    friction: 7, // Adjust for a more refined bounce effect
     useNativeDriver: true,
   }).start();
 
   return (
-    <View className="flex items-center justify-center gap-1">
+    <View style={{ alignItems: "center", justifyContent: "center", marginTop: 10 }}>
       <Animated.View
         style={{
           transform: [{ scale }],
-          backgroundColor: focused ? "#FFA00120" : "transparent", // background on focus
-          padding: 10,
-          borderRadius: 20,
-          shadowColor: focused ? "#FFA001" : "#000",
-          shadowOpacity: focused ? 0.3 : 0,
-          shadowRadius: 8,
-          shadowOffset: { width: 0, height: 4 },
+          backgroundColor: focused ? "#FFA00120" : "transparent", // Subtle background color for focused tab
+          padding: 15, // Increase padding for better spacing
+          borderRadius: 35, // Larger rounded corners for a more modern look
+          shadowColor: focused ? "#FFA001" : "#2A2B3D",
+          shadowOpacity: focused ? 0.25 : 0.15,
+          shadowRadius: focused ? 12 : 8,
+          shadowOffset: { width: 0, height: 6 },
         }}
       >
         <Image
           source={icon}
           resizeMode="contain"
-          style={{ tintColor: color, width: 25, height: 25 }}
+          style={{ tintColor: color, width: 32, height: 32 }} // Slightly larger icons for better visual impact
         />
       </Animated.View>
       <Text
-        className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
-        style={{ color: color }}
+        style={{
+          color: color,
+          fontSize: 13,
+          fontWeight: focused ? "600" : "400",
+          marginTop: 6,
+          letterSpacing: 0.5, // Add spacing for the text
+          textTransform: "capitalize", // Capitalize first letter of the text
+        }}
       >
         {name}
       </Text>
@@ -47,62 +53,63 @@ const TabIcon = ({ icon, color, name, focused }) => {
 const TabLayout = () => {
   return (
     <>
+      <StatusBar style="light" />
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: "#FFA001",
           tabBarInactiveTintColor: "#CDCDE0",
           tabBarShowLabel: false,
           tabBarStyle: {
-            backgroundColor: "#161622",
+            backgroundColor: "#1C1C2D",
             borderTopWidth: 1,
-            borderTopColor: "#232533",
-            height: 80,
+            borderTopColor: "#2A2B3D",
+            height: 80, // Increase height for a more spacious look
+            paddingBottom: 20, // Ensure enough padding at the bottom for a comfortable touch area
+            elevation: 10, // Add shadow for better depth
           },
         }}
       >
         <Tabs.Screen
           name="timetable"
           options={{
-            title: "timetable",
+            title: "Timetable",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon icon={icons.timetable} color={color} name="timetable" focused={focused} />
+              <TabIcon icon={icons.timetable} color={color} name="Timetable" focused={focused} />
             ),
           }}
         />
         <Tabs.Screen
           name="message"
           options={{
-            title: "message",
+            title: "Message",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon icon={icons.message} color={color} name="message" focused={focused} />
+              <TabIcon icon={icons.message} color={color} name="Message" focused={focused} />
             ),
           }}
         />
         <Tabs.Screen
           name="blogs"
           options={{
-            title: "blogs",
+            title: "Blogs",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon icon={icons.blogs} color={color} name="blogs" focused={focused} />
+              <TabIcon icon={icons.blogs} color={color} name="Blogs" focused={focused} />
             ),
           }}
         />
         <Tabs.Screen
           name="ebook"
           options={{
-            title: "ebook",
+            title: "Ebook",
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
-              <TabIcon icon={icons.ebook} color={color} name="ebook" focused={focused} />
+              <TabIcon icon={icons.ebook} color={color} name="Ebook" focused={focused} />
             ),
           }}
         />
-        
       </Tabs>
-      
     </>
   );
 };
