@@ -21,9 +21,9 @@ const Timetable = () => {
           resizeMode="contain"
         />
 
-        <Text style={styles.heading}>Set Your Timetable</Text>
+        <Text style={styles.heading}>Set your Timetable</Text>
         <Text style={styles.subheading}>
-          Organize your study schedule easily and stay on track with our interactive timetable.
+          Organize your study schedule easily and stay on track with our interactive timetable
         </Text>
 
         <Pressable
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   heading: {
-    fontSize: 38,
-    fontWeight: '800',
+    fontSize: 37,
+    fontWeight: '900',
     color: '#333333', // Dark gray text for high contrast on light blue
     textAlign: 'center',
     marginBottom: 12,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 5,
   },
   subheading: {
-    fontSize: 20,
+    fontSize: 16,
     color: '#555555', // Darker text for readability on light blue
     textAlign: 'center',
     marginBottom: 40,
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#0277bd', // Contrasting medium blue for the button
-    width: '80%',
+    width: '75%',
     paddingVertical: 16,
     borderRadius: 12,
     shadowColor: '#0277bd',
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#ffffff',
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: '900',
   },
 });
 
