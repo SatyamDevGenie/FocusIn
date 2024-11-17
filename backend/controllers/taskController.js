@@ -71,4 +71,56 @@ const getAllTasks = asyncHandler(async (req, res) => {
 
 
 
-export { addTask, getAllTasks };
+
+// @desc Update an existing task
+// @route PUT /api/tasks/:id
+// @access Private
+const updateTask = asyncHandler(async (req, res) => {
+  try {
+    const { taskName, description, startTime, endTime, date, days, voiceMessageUrl, textToSpeechUrl } = req.body;
+
+    // Find the task by ID
+    const task = await Task.findById(req.params.id);
+
+    if (!task) {
+      return res.status(404).json({ success: false, message: "Task not found" });
+    }
+
+    // Check if the task belongs to the logged-in user
+    if (task.userId.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ success: false, message: "Not authorized to update this task" });
+    }
+
+    // Update the task fields
+    task.taskName = taskName || task.taskName;
+    task.description = description || task.description;
+    task.startTime = startTime || task.startTime;
+    task.endTime = endTime || task.endTime;
+    task.date = date || task.date;
+    task.days = days || task.days;
+    task.voiceMessageUrl = voiceMessageUrl || task.voiceMessageUrl;
+    task.textToSpeechUrl = textToSpeechUrl || task.textToSpeechUrl;
+
+    // Save the updated task
+    const updatedTask = await task.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Task updated successfully",
+      data: updatedTask,
+    });
+  } catch (error) {
+    console.error("Error updating task:", error.message);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while updating the task. Please try again later.",
+    });
+  }
+});
+
+
+
+
+
+
+export { addTask, getAllTasks, updateTask };

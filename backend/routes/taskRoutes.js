@@ -1,5 +1,5 @@
 import express from "express";
-import { addTask, getAllTasks } from "../controllers/taskController.js";
+import { addTask, getAllTasks, updateTask } from "../controllers/taskController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
@@ -13,5 +13,11 @@ router.post("/create", protect, addTask);
 // @desc Get all tasks for the logged-in user
 // @access Private
 router.get("/", protect, getAllTasks);
+
+
+// @route PUT /api/tasks/:id
+// @desc Update a task
+// @access Private
+router.put("/:id", protect, updateTask);
 
 export default router;
