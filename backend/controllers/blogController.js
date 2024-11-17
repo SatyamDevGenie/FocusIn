@@ -1,6 +1,7 @@
 import Blog from "../models/blogModel.js";
 import User from "../models/userModel.js";
 import asyncHandler from "express-async-handler";  // for handling async routes with try/catch
+import mongoose from "mongoose";
 
 // @desc Create a new blog
 // @route POST /api/blogs/create
@@ -146,7 +147,50 @@ const updateBlog = asyncHandler(async (req, res) => {
       });
     }
   });
+
+
+  // @desc Delete a blog
+// @route DELETE /api/blogs/:id
+// @access Private (User must be logged in and own the blog)
+const deleteBlog = asyncHandler(async (req, res) => {
+    const blogId = req.params.id;
+  
+    try {
+      // Find the blog by ID
+      const blog = await Blog.findById(blogId);
+  
+      if (!blog) {
+        return res.status(404).json({
+          success: false,
+          message: "Blog not found",
+        });
+      }
+  
+      // Check if the logged-in user is the author of the blog
+      if (blog.author.toString() !== req.user._id.toString()) {
+        return res.status(403).json({
+          success: false,
+          message: "You are not authorized to delete this blog",
+        });
+      }
+  
+      // Delete the blog
+      await blog.deleteOne();
+  
+      res.status(200).json({
+        success: true,
+        message: "Blog deleted successfully",
+      });
+    } catch (error) {
+      console.error("Error deleting blog:", error.message);
+      res.status(500).json({
+        success: false,
+        message: "An error occurred while deleting the blog. Please try again later.",
+      });
+    }
+  });
+  
   
 
 
-export { createBlog, getSingleBlog, getAllBlogs, updateBlog };
+export { createBlog, getSingleBlog, getAllBlogs, updateBlog, deleteBlog };
