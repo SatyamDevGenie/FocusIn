@@ -1,5 +1,5 @@
 import express from "express";
-import { addTask, getAllTasks, updateTask, deleteTask } from "../controllers/taskController.js";
+import { addTask, getAllTasks, updateTask, deleteTask, getSingleTask } from "../controllers/taskController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
@@ -13,6 +13,12 @@ router.post("/create", protect, addTask);
 // @desc Get all tasks for the logged-in user
 // @access Private
 router.get("/", protect, getAllTasks);
+
+
+// @route GET /api/tasks/:id
+// @desc Get single task for the logged-in user
+// @access Private
+router.get("/:id", protect, getSingleTask)
 
 
 // @route PUT /api/tasks/:id

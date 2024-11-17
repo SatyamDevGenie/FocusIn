@@ -71,6 +71,46 @@ const getAllTasks = asyncHandler(async (req, res) => {
 });
 
 
+// @desc Get a single task by ID
+// @route GET /api/tasks/:id
+// @access Private
+const getSingleTask = asyncHandler(async (req, res) => {
+  try {
+    const taskId = req.params.id;
+
+    // Validate if the taskId is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(taskId)) {
+      return res.status(400).json({ success: false, message: "Invalid task ID" });
+    }
+
+    // Find the task by ID
+    const task = await Task.findById(taskId);
+
+    if (!task) {
+      return res.status(404).json({ success: false, message: "Task not found" });
+    }
+
+    // Check if the task belongs to the logged-in user
+    if (task.userId.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ success: false, message: "Not authorized to view this task" });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: task,
+    });
+  } catch (error) {
+    console.error("Error fetching task:", error.message);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while fetching the task. Please try again later.",
+    });
+  }
+});
+
+
+
+
 
 
 // @desc Update an existing task
@@ -165,4 +205,4 @@ const deleteTask = asyncHandler(async (req, res) => {
 
 
 
-export { addTask, getAllTasks, updateTask, deleteTask };
+export { addTask, getAllTasks, getSingleTask, updateTask, deleteTask };
