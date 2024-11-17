@@ -67,5 +67,35 @@ const getSingleBlog = asyncHandler(async (req, res) => {
   });
 
 
+  // @desc Get all blogs for the logged-in user
+// @route GET /api/blogs
+// @access Private (Protected Route, requires login)
+const getAllBlogs = asyncHandler(async (req, res) => {
+    try {
+      // Find all blogs for the logged-in user (filter by user ID)
+      const blogs = await Blog.find({ author: req.user._id }).populate("author", "name email");
+  
+      if (!blogs || blogs.length === 0) {
+        return res.status(404).json({
+          success: false,
+          message: "No blogs found for this user",
+        });
+      }
+  
+      // Respond with the list of blogs
+      res.status(200).json({
+        success: true,
+        data: blogs,
+      });
+    } catch (error) {
+      console.error("Error fetching blogs:", error.message);
+      res.status(500).json({
+        success: false,
+        message: "An error occurred while fetching blogs. Please try again later.",
+      });
+    }
+  });
 
-export { createBlog, getSingleBlog };
+
+
+export { createBlog, getSingleBlog, getAllBlogs };
