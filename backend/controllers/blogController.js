@@ -41,4 +41,31 @@ const createBlog = asyncHandler(async (req, res) => {
   });
 });
 
-export { createBlog };
+
+
+// @desc Get a single blog by ID
+// @route GET /api/blogs/:id
+// @access Public
+const getSingleBlog = asyncHandler(async (req, res) => {
+    const { id } = req.params; // Get the blog ID from the route parameter
+  
+    // Find the blog by ID
+    const blog = await Blog.findById(id).populate("author", "name email"); // Populate the author field with user's name and email
+  
+    if (!blog) {
+      return res.status(404).json({
+        success: false,
+        message: "Blog not found",
+      });
+    }
+  
+    // Respond with the blog data
+    res.status(200).json({
+      success: true,
+      data: blog,
+    });
+  });
+
+
+
+export { createBlog, getSingleBlog };
