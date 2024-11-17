@@ -97,5 +97,56 @@ const getAllBlogs = asyncHandler(async (req, res) => {
   });
 
 
+  // @desc Update a blog
+// @route PUT /api/blogs/:id
+// @access Private (User must be logged in and own the blog)
+const updateBlog = asyncHandler(async (req, res) => {
+    const { title, content, images, videos } = req.body;
+    const blogId = req.params.id;
+  
+    try {
+      // Find the blog by ID
+      const blog = await Blog.findById(blogId);
+  
+      if (!blog) {
+        return res.status(404).json({
+          success: false,
+          message: "Blog not found",
+        });
+      }
+  
+      // Check if the logged-in user is the author of the blog
+      if (blog.author.toString() !== req.user._id.toString()) {
+        return res.status(403).json({
+          success: false,
+          message: "You are not authorized to update this blog",
+        });
+      }
+  
+      // Update the blog details
+      blog.title = title || blog.title;
+      blog.content = content || blog.content;
+      blog.images = images || blog.images;
+      blog.videos = videos || blog.videos;
+      blog.updatedAt = Date.now(); // Update the 'updatedAt' field
+  
+      // Save the updated blog
+      await blog.save();
+  
+      res.status(200).json({
+        success: true,
+        message: "Blog updated successfully",
+        data: blog,
+      });
+    } catch (error) {
+      console.error("Error updating blog:", error.message);
+      res.status(500).json({
+        success: false,
+        message: "An error occurred while updating the blog. Please try again later.",
+      });
+    }
+  });
+  
 
-export { createBlog, getSingleBlog, getAllBlogs };
+
+export { createBlog, getSingleBlog, getAllBlogs, updateBlog };
