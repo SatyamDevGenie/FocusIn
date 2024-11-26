@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import connectDB from './config/db.js';  // Ensure you add the .js extension
 import chalk from "chalk";
+import cors from "cors";
 import userRoutes from "./routes/userRoutes.js"
 import taskRoutes from "./routes/taskRoutes.js"
 import blogRoutes from "./routes/blogRoutes.js"
@@ -14,6 +15,18 @@ connectDB();
 
 
 const app = express();
+
+ app.use(cors());
+
+// Enable CORS for a specific origin (your frontend)
+// const corsOptions = {
+//     origin: 'http://localhost:8082',  // Replace with your frontend URL
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allow specific methods if needed
+//     allowedHeaders: ['Content-Type', 'Authorization']  // Customize as needed
+//   };
+  
+//   // Use CORS middleware with the configured options
+//   app.use(cors(corsOptions));
 
 
 // Middleware
